@@ -41,6 +41,9 @@ public class Dept {
     @Column(nullable = false)
     private LocalDate creationDate;
 
+    @Column(nullable = true)
+    private int deptCode;
+
     @Column(name = "is_parent")
     private boolean isParent;
 

@@ -13,7 +13,7 @@ import { Role } from 'src/app/model/Role';
   </div>
   <div class="modal-body">
     <p><strong>Are you sure you want to remove <i>{{role.position.name}}</i> position for member 
-    <span class="text-primary">"{{role.member.fname}} {{role.member.lname}}"</span>?</strong></p>
+    <span class="text-primary">"{{role.member.kfname}} {{role.member.klname}}"</span>?</strong></p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>

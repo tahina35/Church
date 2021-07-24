@@ -21,6 +21,7 @@ import { DisplayDepartmentComponent } from './components/department/display-depa
 import { RegisterMemberComponent } from './components/member/register-member/register-member.component';
 import { SundayServiceComponent } from './components/worshipServices/sunday-service/sunday-service.component';
 import { EventComponent } from './components/event/event.component';
+import { NewFormComponent } from './components/reimbursement/new-form/new-form.component';
 
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -42,6 +43,11 @@ import { ColorGithubModule } from 'ngx-color/github';
 import { NotificationComponent } from './components/notification/notification.component';
 import { FromNowPipe } from './pipe/FromNowPipe';
 import { WeekDayPipe } from './pipe/WeekDayPipe';
+import { ReimbursementMainComponent } from './components/reimbursement/reimbursement-main/reimbursement-main.component';
+import { MainMenuComponent } from './components/reimbursement/main-menu/main-menu.component';
+import { DateToStringPipe } from './pipe/DateToStringPipe';
+import { SignaturePadModule } from 'angular2-signaturepad';
+
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -68,12 +74,16 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     GenderPipe,
     WeekDayPipe,
     FromNowPipe,
+    DateToStringPipe,
     MorningServiceComponent,
     VideoPlayerModal,
     YouthServiceComponent,
     NewsComponent,
     EventComponent,
-    NotificationComponent
+    NotificationComponent,
+    NewFormComponent,
+    ReimbursementMainComponent,
+    MainMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,12 +96,14 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NgbDatepickerModule,
     NgbTimepickerModule,
     NgbTooltipModule,
+    NgbDropdownModule,
     NgbModule,
     YouTubePlayerModule,
     CKEditorModule,
     FullCalendarModule,
     ColorGithubModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    SignaturePadModule 
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

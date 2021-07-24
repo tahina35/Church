@@ -30,19 +30,19 @@ public class RegistrationService {
                         new Member(
                                 request.getFname(),
                                 request.getLname(),
-                                request.getEmail(),
-                                password,
                                 request.getGender(),
                                 LocalDate.now(),
-                                request.getStreetAddressLine1(),
-                                request.getStreetAddressLine2(),
+                                request.getStreetName(),
+                                request.getStreetAddress(),
+                                request.getAptNumber(),
                                 request.getCity(),
                                 request.getState(),
                                 request.getZipCode(),
-                                request.getPhoneNumber()
+                                request.getEmail(),
+                                request.getPhoneNumber(),
+                                password
                         )
         );
-
 
         emailSender.send(request.getEmail(), buildHtml(request.getFname(), password));
 

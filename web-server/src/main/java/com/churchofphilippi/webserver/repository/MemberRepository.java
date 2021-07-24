@@ -54,4 +54,16 @@ public interface MemberRepository extends JpaRepository<Member, Long>, JpaSpecif
             nativeQuery = true
     )
     Page<Member> findByDepartemntPaginated(long deptId, Pageable pageable);
+
+    @Query(
+            value = "SELECT m.* FROM member m INNER JOIN role r ON m.member_id = r.member_id INNER JOIN position p ON p.position_id = r.position_id WHERE p.position_id = 2",
+            nativeQuery = true
+    )
+    Member findAdminPastor();
+
+    @Query(
+            value = "SELECT m.* FROM member m INNER JOIN role r ON m.member_id = r.member_id INNER JOIN position p ON p.position_id = r.position_id WHERE p.position_id = 1",
+            nativeQuery = true
+    )
+    List<Member> findPastors();
 }

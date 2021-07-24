@@ -19,8 +19,8 @@
                       <h3 class="card-title"><strong>General information</strong></h3>
                     </div>
                     <div class="card-body">
-                        <h5><strong>{{memberDetails.member.fname}} {{memberDetails.member.lname}}</strong></h5>
-                        <span>{{memberDetails.member.streetAddressLine1}} {{memberDetails.member.streetAddressLine2}}</span>
+                        <h5><strong>{{memberDetails.member.kfname}} {{memberDetails.member.klname}}</strong></h5>
+                        <span>{{memberDetails.member.streetAddress}} {{memberDetails.member.streetName}}</span> <span >, s{{memberDetails.member.aptNumber}}</span>
                         <br>
                         <span>{{memberDetails.member.city}}, {{memberDetails.member.state}} {{memberDetails.member.zipCode}}</span>
                         <br>
@@ -106,7 +106,7 @@
     <ng-template #department let-modal>
         <form (ngSubmit)="updateDept()" #deptForm="ngForm">
           <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Add {{memberDetails.member.fname}} to a department</h4>
+            <h4 class="modal-title" id="modal-basic-title">Add {{memberDetails.member.kfname}} to a department</h4>
             <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -135,7 +135,7 @@
     <ng-template #position let-modal>
         <form (ngSubmit)="updatePosition()" #positionForm="ngForm">
           <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Assign {{memberDetails.member.fname}} a new position</h4>
+            <h4 class="modal-title" id="modal-basic-title">Assign {{memberDetails.member.kfname}} a new position</h4>
             <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 
 @Component({
@@ -11,9 +10,9 @@ export class MainComponent implements OnInit {
 
   name: string;
 
-  constructor(private loginService: LoginService, private router: Router) { 
+  constructor(private loginService: LoginService) { 
     let member = JSON.parse(localStorage.getItem('member'));
-    this.name = member.fname + ' ' + member.lname;
+    this.name = member.kfname + ' ' + member.klname;
   }
 
   ngOnInit(): void {

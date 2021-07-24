@@ -45,7 +45,7 @@
                             <td>{{service.date}}</td>
                             <td>{{service.hymn}}</td>
                             <td>{{service.sermon.mainVerse}}</td>
-                            <td>{{service.sermon.preacher.fname}} {{service.sermon.preacher.lname}}</td>
+                            <td>{{service.sermon.preacher.kfname}} {{service.sermon.preacher.klname}}</td>
                             <td *ngIf="!service.sermon.isUploaded" class="disabled">video not available</td>
                             <td *ngIf="service.sermon.isUploaded"><a href="javascript:void(0)" (click)="playSermon(service)">Watch sermon</a></td>
                             <td class="text-right">

@@ -1,18 +1,23 @@
 export class Member {
 
     memberId: number
-    fname: string
-    lname: string
+    efname: string
+    elname: string
+    emname: string
     gender: string
+    klname: string
+    kfname: string
     memberDate: string
-    streetAddressLine1: string
-    streetAddressLine2: string
+    streetAddress: string
+    streetName: string
+    aptNumber: string
     city: string
     state: string
     zipCode: number
     email: string
     phoneNumber: string
     password: string
+    signature: string
     admin: boolean
 
 }

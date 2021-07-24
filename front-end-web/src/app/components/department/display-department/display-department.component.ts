@@ -158,6 +158,7 @@ export class DisplayDepartmentComponent implements OnInit {
     this.dept.deptId = department.deptId;
     this.dept.creationDate = department.creationDate;
     this.dept.name = department.name;
+    this.dept.deptCode = department.deptCode;
     if(department.leader) {
       this.dept.leader.memberId = department.leader.memberId;
     }
@@ -166,7 +167,7 @@ export class DisplayDepartmentComponent implements OnInit {
       (data: Member[]) => {
         const members = data.map(
           (member: Member) => {
-            return ({id: member.memberId.toString(), text: member.fname + ' ' + member.lname});
+            return ({id: member.memberId.toString(), text: member.kfname + ' ' + member.klname});
           }
         );
 

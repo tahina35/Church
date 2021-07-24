@@ -17,6 +17,10 @@ import { YouthServiceComponent } from './components/worshipServices/youth-servic
 import { NewsComponent } from './components/news/news.component';
 import { EventComponent } from './components/event/event.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { NewFormComponent } from './components/reimbursement/new-form/new-form.component';
+import { ReimbursementMainComponent } from './components/reimbursement/reimbursement-main/reimbursement-main.component';
+import { MainMenuComponent } from './components/reimbursement/main-menu/main-menu.component';
+
 
 const routes: Routes = [
   { 
@@ -34,12 +38,20 @@ const routes: Routes = [
       { path: 'morning-service', component: MorningServiceComponent },
       { path: 'news', component: NewsComponent },
       { path: 'event', component: EventComponent },
-      { path: 'notification', component: NotificationComponent }
+      { path: 'notification', component: NotificationComponent },
     ]
   }, 
   { path: 'login', component: LoginComponent }, 
   { path: 'forgot-password', component: RequestEmailComponent },
-  { path: 'reset-password', component: ResetPasswordComponent }
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { 
+    path: 'reimbursement', component: ReimbursementMainComponent,
+    children: [
+      { path: '', redirectTo: 'main-menu', pathMatch: 'full' },
+      { path: 'new-form', component: NewFormComponent },
+      { path: 'main-menu', component: MainMenuComponent },
+    ]
+  }
 ];
 
 @NgModule({

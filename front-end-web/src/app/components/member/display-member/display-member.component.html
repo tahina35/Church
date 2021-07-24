@@ -62,11 +62,11 @@
                         </thead>
                         <tbody>
                           <tr *ngFor="let member of members">
-                            <td> <a class="table-link" [routerLink]="['/member/update', member.memberId]"> {{member.fname}} </a></td>
-                            <td><a class="table-link" [routerLink]="['/member/update', member.memberId]"> {{member.lname}} </a></td>
+                            <td> <a class="table-link" [routerLink]="['/member/update', member.memberId]"> {{member.kfname}} </a></td>
+                            <td><a class="table-link" [routerLink]="['/member/update', member.memberId]"> {{member.klname}} </a></td>
                             <td><a class="table-link" [routerLink]="['/member/update', member.memberId]"> {{member.email}} </a></td>
                             <td>{{member.gender | gender}}</td>
-                            <td>{{member.streetAddressLine1}} {{member.streetAddressLine2}}, {{member.city}}, {{member.state}} {{member.zipCode}}</td>
+                            <td>{{member.streetAddress}} {{member.streetName}}, {{member.city}}, {{member.state}} {{member.zipCode}}</td>
                             <td>{{member.phoneNumber}}</td>
                             <td>{{member.memberDate}}</td>
                           </tr>

@@ -1,0 +1,283 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="container-fluid" style="background-color: #f4f6f9">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Reimbursement</h1>
+          </div>
+          <a class="nav-link pointer" (click)="logout()">
+            Log out
+          </a>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <section class="content" >
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <!-- Main content -->
+            <div class="invoice p-3 mb-3">
+
+              <div class="row invoice-info">
+                <div class="col-12" *ngIf="formErrors.length > 0" style="color: red;">
+                  <div class="callout callout-danger">
+                     <h5 style="color: black;">
+                       Please fill out the following required fields:
+                     </h5> 
+                     <ul>
+                       <li *ngFor="let error of formErrors">{{error}}</li>
+                     </ul>
+                  </div>
+                </div>
+                <div class="col-sm-4 invoice-col"></div>
+                <div class="col-sm-4 invoice-col">
+                  <div class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Please select a category</label>
+                        <div class="col-sm-7">
+                            <select class="custom-select" [(ngModel)]="paymentRequest.category" name="category">
+                              <option [ngValue]="1" selected>general</option>
+                              <option [ngValue]="2">designated</option>
+                              <option [ngValue]="3">guest speaker</option>
+                            </select>
+                        </div>
+                    </div>
+                  </div>    
+                </div>
+                <div class="col-sm-4 invoice-col"></div>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" [(ngModel)]="paymentRequest.paidByCreditCard" class="form-check-input" id="credit-card">
+                <label class="form-check-label" for="credit-card"><b>Pay by credit card</b></label>
+              </div>
+              <br>
+              <!-- info row -->
+              <div class="row invoice-info">
+                
+                <div class="col-sm-6 invoice-col">
+                  <div class="form-horizontal">
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Date</label>
+                      <div class="input-group col-sm-9">
+                        <input class="form-control"  [(ngModel)]="date" ngbDatepicker #sd="ngbDatepicker" placeholder="Date" name="date" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" (click)="sd.toggle()" type="button"> 
+                              <i class="far fa-calendar-alt"></i>
+                            </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label"> Ministry Team Leader</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" [(ngModel)]="requestorName" name="mtl" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Steering Commitee</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" [(ngModel)]="deptLeaderName" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Pastor of Department</label>
+                        <div class="col-sm-9">
+                          <ng-select2 [data]="pastors" [(ngModel)]="selectedPastor" [width]="300" >		
+                          </ng-select2>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.col -->
+               
+                <!-- /.col -->
+                <div class="col-sm-6 invoice-col">
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Ministry Team</label>
+                            <div class="col-sm-9">
+                              <select class="custom-select" [(ngModel)]="paymentRequest.department" (ngModelChange)="deptChange($event)">
+                                <option *ngFor="let dept of allDepts" [ngValue]="dept">{{dept.name}}</option>
+                              </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+
+              <br>
+              <!-- Table row -->
+              <div class="row">             
+                <div class="col-12 table-responsive">
+                  <button type="button" class="btn  btn-primary" (click)="open(expenseitems)">Add Item</button>
+                  <table class="table table-striped mt-2">
+                    <thead>
+                      <tr>
+                        <th>Budget Code</th>
+                        <th>Purchase Date</th>
+                        <th>Item</th>
+                        <th>Detailed Purpose</th>
+                        <th>Amount</th>
+                        <th>Remarks</th>
+                        <th class="text-center">Remove</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of items">
+                        <td>{{item.budgetCode.code}}</td>
+                        <td>{{item.purchaseDate | dateToString}}</td>
+                        <td>{{item.itemName}}</td>
+                        <td>{{item.detailedPurpose}}</td>
+                        <td>${{item.amount}}</td>
+                        <td>{{item.remarks}}</td>
+                        <td class="text-center">
+                          <a class="btn btn-danger pointer" (click)="removeItem(item)" ngbTooltip="remove"><i class="fas fa-trash "></i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="row mb-3">
+                    <div class="col-12">
+                      <span class="mr-3"><b>Upload receipts and document here</b></span>
+                      <input type="file" multiple (change)="onChange($event)">
+                    </div>
+                    <!-- <button type="button" (click)="uploadDocuments()" class="btn  btn-primary btn-sm ">Upload receipts</button> -->
+                  </div>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+
+              <div class="row">
+                <!-- accepted payments column -->
+                <div class="col-12">
+                  <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                    * If the expense is for gift card or lunch/dinner meeting, please write name of the gift card recipients and meeting attendees.
+                  </p>
+                  <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                    * On detailed purpose, please, provide when you purchase, where you purchase and what you use for (e.g. water for discovery class)
+                  </p>
+                </div>
+                <!-- /.col -->
+                <div class="col-10">
+                    <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">Payable to</label>
+                        <div class="col-sm-11">
+                            <input type="text" class="form-control" [(ngModel)]="requestorName" name="name" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">Address</label>
+                        <div class="col-sm-11">
+                            <input type="text" class="form-control" [(ngModel)]="requestorAddress" name="address">
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+
+              <br>
+              
+              <div class="row">
+                <div class="col-12">
+                  <p><b>Requestor Name: {{requestorName}}</b></p>
+                  <p><b>Please sign here: </b></p>
+                  <div class="sig-container mb-1">
+                    <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+                  </div>
+                  <div class="input-group">
+                    <button type="button" (click)="clear()" class="btn btn-sm btn-outline-primary">clear</button>
+                  </div>
+                </div>
+                
+              </div>
+
+              <!-- this row will not appear when printing -->
+              <div class="row no-print">
+                <div class="col-12">
+                  <div class="float-right"> 
+                    <button type="button" class="btn  btn-success mr-1" (click)="submit()">
+                      <i *ngIf="submitting" class="fas fa-circle-notch fa-spin" style="text-align: right;"></i>
+                      Sign and Submit
+                    </button>
+                    <button type="button" class="btn  btn-default">Cancel</button>
+                  </div>
+                </div>                
+              </div>
+            </div>
+            <!-- /.invoice -->
+          </div><!-- /.col -->
+
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+
+  <ng-template #expenseitems let-modal>
+    <form (ngSubmit)="addItem()" #addItemForm="ngForm">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add items</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="title">Budget Code</label>
+          <select class="custom-select" [(ngModel)]="selectedBudgetCode" name="budgetCode" required>
+            <option *ngFor="let code of budgetCodes" [ngValue]="code">{{code.description}}</option>
+          </select>
+        </div> 
+        <div class="form-group">
+          <label for="deptname">Item</label>
+          <div class="input-group">
+            <input type="text" id="item" class="form-control" [(ngModel)]="expenseItem.itemName"  placeholder="Item name" name="item" required>
+          </div>
+        </div>    
+        <div class="form-group">
+          <label for="deptname">Detailed purpose</label>
+          <div class="input-group">
+            <textarea rows="3" id="item" class="form-control" [(ngModel)]="expenseItem.detailedPurpose"  placeholder="Detailed purpose" name="purpose" required></textarea>
+          </div>
+        </div>    
+        <div class="form-group">
+          <label for="deptname">Amount ($)</label>
+          <div class="input-group">
+            <input type="number" id="amount" class="form-control" [(ngModel)]="expenseItem.amount" placeholder="Amount" name="purpose" required>
+          </div>
+        </div>  
+        <div class="form-group">
+          <label class="col-form-label">Date</label>
+          <div class="input-group">
+            <input class="form-control" [(ngModel)]="purchaseDate" ngbDatepicker #pd="ngbDatepicker" placeholder="Date" name="purchaseDate" required>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" (click)="pd.toggle()" type="button"> 
+                  <i class="far fa-calendar-alt"></i>
+                </button>
+            </div>
+          </div>
+        </div>   
+        <div class="form-group">
+          <label for="deptname">Remarks</label>
+          <div class="input-group">
+            <textarea rows="3" id="remarks" class="form-control" [(ngModel)]="expenseItem.remarks"  placeholder="Remarks" name="remarks"></textarea>
+          </div>
+        </div>       
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-outline-primary" [disabled]="!addItemForm.form.valid">Add</button>
+          <button type="button" class="btn btn-default" (click)="modal.dismiss('Cross click')">Cancel</button>
+      </div>
+    </form>
+  </ng-template>
+

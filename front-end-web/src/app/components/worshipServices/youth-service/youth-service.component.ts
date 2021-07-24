@@ -49,7 +49,7 @@ export class YouthServiceComponent implements OnInit {
       (data: Member[]) => {
         this.preachers = data.map(
           (preacher: Member) => {
-            return ({id: preacher.memberId.toString(), text: preacher.fname + ' ' + preacher.lname});
+            return ({id: preacher.memberId.toString(), text: preacher.kfname + ' ' + preacher.klname});
           }
         );
       },

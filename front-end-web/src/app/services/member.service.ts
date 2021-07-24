@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
 import { DeptMember } from '../model/DeptMember';
 import { Member } from '../model/Member';
 import { Role } from '../model/Role';
@@ -12,7 +11,7 @@ import { BaseService } from './base.service';
 })
 export class MemberService extends BaseService {
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
     super();
   }
 
@@ -52,6 +51,10 @@ export class MemberService extends BaseService {
     return this.http.get(this.baseUrl + '/api/member/filters');
   }
 
+  getPastors() {
+    return this.http.get(this.baseUrl + '/api/member/pastors');
+  }
+
   removeFromDepartment(dept: DeptMember) {
     return this.http.post(this.baseUrl + '/api/member/remove-from-department', dept)
   }
@@ -62,6 +65,25 @@ export class MemberService extends BaseService {
 
   getByDepartment(id: number) {
     return this.http.get(this.baseUrl + '/api/member/department/' + id);
+  }
+
+  getName(member: Member) {
+    if(member.kfname || member.klname) {
+      return member.kfname + " " + member.klname;
+    } 
+
+    return member.efname + " " + member.elname;
+  }
+
+  getAddress(member: Member) {
+
+    let aptNumber = "";
+    if(member.aptNumber) {
+      aptNumber = ", APT #" + member.aptNumber;
+    }
+
+    let address = member.streetAddress + " " + member.streetName + aptNumber + ", " + member.city + ", " + member.state + " " + member.zipCode;
+    return address;
   }
 
 }

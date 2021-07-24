@@ -53,7 +53,7 @@ export class SundayServiceComponent implements OnInit {
       (data: Member[]) => {
         const members = data.map(
           (preacher: Member) => {
-            return ({id: preacher.memberId.toString(), text: preacher.fname + ' ' + preacher.lname});
+            return ({id: preacher.memberId.toString(), text: preacher.kfname + ' ' + preacher.klname});
           }
         );
         this.preachers = members;

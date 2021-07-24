@@ -33,31 +33,50 @@ public class Member implements UserDetails {
     private Long memberId;
 
     @Column(
-            nullable = false,
-            length = 100
+            length = 100,
+            name ="efname"
     )
-    private String fname;
+    private String efname;
 
     @Column(
-            nullable = false,
-            length = 100
+            length = 100,
+            name ="elname"
     )
-    private String lname;
+    private String elname;
 
-    @Column(nullable = false)
-    private char gender;
+    @Column(
+            length = 100,
+            name ="emname"
+    )
+    private String emname;
 
-    @Column(nullable = false)
+    @Column(
+            length = 100,
+            name ="kfname"
+    )
+    private String kfname;
+
+    @Column(
+            length = 100,
+            name ="klname"
+    )
+    private String klname;
+
+    @Column(length = 1)
+    private String gender;
+
     private LocalDate memberDate;
 
-    @Column(nullable = false)
     private Boolean active = true;
 
     @Column(length = 150)
-    private String streetAddressLine1;
+    private String streetName;
 
     @Column(length = 150)
-    private String streetAddressLine2;
+    private String streetAddress;
+
+    @Column(length = 5)
+    private String aptNumber;
 
     @Column(length = 50)
     private String city;
@@ -65,31 +84,30 @@ public class Member implements UserDetails {
     @Column(length = 2)
     private String state;
 
-    private int zipCode;
+    private Integer zipCode;
 
-    @Column(
-            unique = true
-    )
     private String email;
 
     @Column(length = 10)
     private String phoneNumber;
 
-    @Column(nullable = false)
     private Boolean admin = false;
 
-    @Column(nullable = false)
     private String password;
+
+    @Column(columnDefinition="TEXT")
+    private String signature;
 
     private String accessToken;
 
-    public Member(String fname, String lname, String email, String password, char gender, LocalDate memberDate, String streetAddressLine1, String streetAddressLine2, String city, String state, int zipCode, String phoneNumber) {
-        this.fname = fname;
-        this.lname = lname;
+    public Member(String kfname, String klname, String gender, LocalDate memberDate, String streetName, String streetAddress, String aptNumber, String city, String state, int zipCode, String email, String phoneNumber, String password) {
+        this.kfname = kfname;
+        this.klname = klname;
         this.gender = gender;
         this.memberDate = memberDate;
-        this.streetAddressLine1 = streetAddressLine1;
-        this.streetAddressLine2 = streetAddressLine2;
+        this.streetName = streetName;
+        this.streetAddress = streetAddress;
+        this.aptNumber = aptNumber;
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;

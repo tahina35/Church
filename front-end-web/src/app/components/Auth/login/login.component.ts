@@ -40,16 +40,19 @@ export class LoginComponent implements OnInit {
         this.loginservice.storeToken(token);
         this.memberService.findByUsername(this.credentials.username).subscribe(
           (member: Member) => {
+            let memberDetails = {
+              id: member.memberId,
+              username: member.email,
+              fname: member.kfname,
+              lname: member.klname,
+              efname: member.efname,
+              elname: member.elname,
+              admin: member.admin
+            }
+            localStorage.setItem('member', JSON.stringify(memberDetails));
             if(!member.admin) {
-              this.error = 'Unauthorized user!'
+              this.router.navigate(['/reimbursement']);
             } else {
-              let memberDetails = {
-                id: member.memberId,
-                username: member.email,
-                fname: member.fname,
-                lname: member.lname,
-              }
-              localStorage.setItem('member', JSON.stringify(memberDetails));
               this.router.navigate(['/']);
             }
           },

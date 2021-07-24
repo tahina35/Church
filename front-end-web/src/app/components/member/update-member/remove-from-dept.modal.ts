@@ -12,7 +12,7 @@ import { DeptMember } from 'src/app/model/DeptMember';
     </button>
   </div>
   <div class="modal-body">
-    <p><strong>Are you sure you want to remove <i>{{dept.member.fname}} {{dept.member.lname}}</i> from 
+    <p><strong>Are you sure you want to remove <i>{{dept.member.kfname}} {{dept.member.klname}}</i> from 
     <span class="text-primary">"{{dept.department.name}}"</span>?</strong></p>
   </div>
   <div class="modal-footer">

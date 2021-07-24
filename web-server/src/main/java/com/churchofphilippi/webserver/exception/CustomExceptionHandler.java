@@ -73,4 +73,12 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(NewFormException.class)
+    public final ResponseEntity<ErrorResponse> handleNewFormException
+            (NewFormException ex, WebRequest request) {
+        String message = ex.getLocalizedMessage();
+        ErrorResponse error = new ErrorResponse(BAD_REQUEST, DATABASE, message);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
 }

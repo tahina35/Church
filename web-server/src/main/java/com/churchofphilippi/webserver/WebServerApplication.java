@@ -1,7 +1,9 @@
 package com.churchofphilippi.webserver;
 
+import com.churchofphilippi.webserver.config.GeneralConfig;
 import com.churchofphilippi.webserver.config.MobileConfig;
 import com.churchofphilippi.webserver.config.PageConfig;
+import com.churchofphilippi.webserver.config.PaymentRequestConfig;
 import com.churchofphilippi.webserver.jwt.JwtConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +16,7 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.Arrays;
 
 @SpringBootApplication
-@EnableConfigurationProperties({JwtConfig.class, PageConfig.class, MobileConfig.class})
+@EnableConfigurationProperties({JwtConfig.class, PageConfig.class, MobileConfig.class, PaymentRequestConfig.class, GeneralConfig.class})
 public class WebServerApplication {
 
     public static void main(String[] args) {

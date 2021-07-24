@@ -15,6 +15,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class RoleKey implements Serializable {
 
-    Long memberId;
-    Long positionId;
+    private Long memberId;
+    private Long positionId;
+
 }

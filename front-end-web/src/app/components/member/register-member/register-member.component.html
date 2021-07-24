@@ -29,11 +29,11 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>First name</label>
-                            <input type="text" class="form-control" [ngClass]="{'is-invalid': firstname.touched && !firstname.valid}" name="firstname" #firstname="ngModel" [(ngModel)]="member.fname"  placeholder="First name" required>
+                            <input type="text" class="form-control" [ngClass]="{'is-invalid': firstname.touched && !firstname.valid}" name="firstname" #firstname="ngModel" [(ngModel)]="member.kfname"  placeholder="First name" required>
                         </div>
                         <div class="form-group">
                             <label>Last name</label>
-                            <input type="text" class="form-control" [ngClass]="{'is-invalid': lastname.touched && !lastname.valid}" name="lastname" #lastname="ngModel" [(ngModel)]="member.lname" placeholder="Last name" required>
+                            <input type="text" class="form-control" [ngClass]="{'is-invalid': lastname.touched && !lastname.valid}" name="lastname" #lastname="ngModel" [(ngModel)]="member.klname" placeholder="Last name" required>
                         </div>  
                         
                         <div class="form-group">
@@ -68,11 +68,11 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label >Street address line 1</label>
-                            <input type="email" class="form-control" [ngClass]="{'is-invalid': address1.touched && !address1.valid}" name="address1" #address1="ngModel" [(ngModel)]="member.streetAddressLine1" placeholder="Street address line 1" maxlength="200" required>
+                            <input type="email" class="form-control" [ngClass]="{'is-invalid': address1.touched && !address1.valid}" name="address1" #address1="ngModel" [(ngModel)]="member.streetAddress" placeholder="Street address line 1" maxlength="200" required>
                         </div>
                         <div class="form-group">
                             <label >Street address line 2 (optional)</label>
-                            <input type="email" class="form-control" name="address2"  #address2="ngModel" [(ngModel)]="member.streetAddressLine2" placeholder="Street address line 2 (optional)">
+                            <input type="email" class="form-control" name="address2"  #address2="ngModel" [(ngModel)]="member.streetName" placeholder="Street address line 2 (optional)">
                         </div>
                         <div class="form-group">
                             <label >City</label>

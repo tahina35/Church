@@ -4,11 +4,16 @@ import com.churchofphilippi.webserver.config.PageConfig;
 import com.churchofphilippi.webserver.exception.exceptionModel.ForeignKeyConstraintException;
 import com.churchofphilippi.webserver.model.Dept;
 import com.churchofphilippi.webserver.model.Member;
+import com.churchofphilippi.webserver.model.Position;
+import com.churchofphilippi.webserver.model.Role;
 import com.churchofphilippi.webserver.model.customModels.DepartmentData;
+import com.churchofphilippi.webserver.model.keys.RoleKey;
 import com.churchofphilippi.webserver.model.pagination.CustomPage;
 import com.churchofphilippi.webserver.model.specification.DeptSpecification;
 import com.churchofphilippi.webserver.repository.DeptRepository;
 import com.churchofphilippi.webserver.repository.MemberRepository;
+import com.churchofphilippi.webserver.repository.PositionRepository;
+import com.churchofphilippi.webserver.repository.RoleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -27,6 +33,8 @@ public class DeptService implements BaseService<Dept>{
 
     private final DeptRepository deptRepository;
     private final MemberRepository memberRepository;
+    private final PositionRepository positionRepository;
+    private final RoleRepository roleRepository;
     private final PageConfig pageConfig;
 
     @Override
@@ -36,6 +44,12 @@ public class DeptService implements BaseService<Dept>{
 
     @Override
     public Dept save(Dept entity) {
+//        Member deptLeader = entity.getLeader();
+//        if(deptLeader != null || deptLeader.getMemberId() != null) {
+//            Position deptLeaderPosition = positionRepository.getOne((long)3);
+//            Role role = new Role(new RoleKey(null, null), deptLeader, deptLeaderPosition, LocalDate.now(), null, null);
+//            roleRepository.save(role);
+//        }
         return deptRepository.save(entity);
     }
 
@@ -101,4 +115,5 @@ public class DeptService implements BaseService<Dept>{
         }
         return res;
     }
+
 }

@@ -121,4 +121,9 @@ public class MemberController {
         roleService.delete(role);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/pastors")
+    public ResponseEntity<?> getPastors() {
+        return ResponseEntity.ok(memberService.getPastors());
+    }
 }
