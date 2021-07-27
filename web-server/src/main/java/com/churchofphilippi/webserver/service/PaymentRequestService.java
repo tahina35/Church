@@ -88,4 +88,17 @@ public class PaymentRequestService implements BaseService<PaymentRequest> {
             signatureRepository.save(s);
         }
     }
+
+    public List<PaymentRequestData> getPrWaitingForSignature(Long memberId) {
+        List<PaymentRequestData> data = new ArrayList<PaymentRequestData>();
+        List<PaymentRequest> paymentRequests = paymentRequestRepository.getPrWaitingForSignature(memberId);
+        for(PaymentRequest pr : paymentRequests) {
+            PaymentRequestData prData = new PaymentRequestData();
+            prData.setPaymentRequest(pr);
+            List<ExpenseItem> items = prExpenseItemRepository.getExpenseItems(pr.getPaymentRequestId());
+            prData.setItems(items);
+            data.add(prData);
+        }
+        return data;
+    }
 }

@@ -1,0 +1,6 @@
+.invoice {
+    min-height: 100%;
+    height: auto !important; /*min-height hack*/
+    height: 100%;            /*min-height hack*/
+    margin-bottom: -4em;     /*Negates #push on longer pages*/  
+}

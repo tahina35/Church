@@ -16,5 +16,6 @@ export class PaymentRequest {
     department: Dept = new Dept()
     checkDetails: checkDetails
     category: number = 1
+    payableTo: string
 
 }

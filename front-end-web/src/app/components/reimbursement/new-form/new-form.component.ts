@@ -86,6 +86,7 @@ export class NewFormComponent implements OnInit {
         this.member = res;
         this.requestorName = this.memberService.getName(this.member);
         this.requestorAddress = this.memberService.getAddress(this.member);
+        this.paymentRequest.payableTo = this.requestorName;
         if(this.member.signature) {
           this.signaturePad.fromDataURL(this.member.signature);
           this.signed = true;
@@ -234,6 +235,9 @@ export class NewFormComponent implements OnInit {
       valid = false;
     } if(this.files.length == 0) {
       this.formErrors.push("Receipts and Documents");
+      valid = false;
+    } if(!this.paymentRequest.payableTo) {
+      this.formErrors.push("Payble to");
       valid = false;
     } if(!this.requestorAddress) {
       this.formErrors.push("Requestor's address");

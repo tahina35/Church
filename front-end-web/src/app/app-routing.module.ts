@@ -20,6 +20,7 @@ import { NotificationComponent } from './components/notification/notification.co
 import { NewFormComponent } from './components/reimbursement/new-form/new-form.component';
 import { ReimbursementMainComponent } from './components/reimbursement/reimbursement-main/reimbursement-main.component';
 import { MainMenuComponent } from './components/reimbursement/main-menu/main-menu.component';
+import { SignerComponent } from './components/reimbursement/signer/signer.component';
 
 
 const routes: Routes = [
@@ -50,6 +51,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'main-menu', pathMatch: 'full' },
       { path: 'new-form', component: NewFormComponent },
       { path: 'main-menu', component: MainMenuComponent },
+      { path: 'signer', component: SignerComponent },
     ]
   }
 ];

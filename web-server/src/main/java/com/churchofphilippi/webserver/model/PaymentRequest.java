@@ -52,6 +52,9 @@ public class PaymentRequest {
 
     private boolean paidByCash = false;
 
+    @Column(nullable = false)
+    private String payableTo;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dept_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

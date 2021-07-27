@@ -20,4 +20,12 @@ export class PaymentRequestService extends BaseService {
     return this.http.post(this.baseUrl + '/api/payment-request/new-form', data);
   }
 
+  getNbOfPRWaitingForSignature(memberId: number) {
+    return this.http.get(this.baseUrl + '/api/payment-request/number-of-pr-waiting-for-signature/member/' + memberId);
+  }
+
+  getPRWaitingForSignature(memberId: number) {
+    return this.http.get(this.baseUrl + '/api/payment-request/pr-waiting-for-signature/member/' + memberId);
+  }
+
 }

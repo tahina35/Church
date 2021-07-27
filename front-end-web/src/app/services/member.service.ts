@@ -68,11 +68,13 @@ export class MemberService extends BaseService {
   }
 
   getName(member: Member) {
-    if(member.kfname || member.klname) {
-      return member.kfname + " " + member.klname;
-    } 
+    if(member.efname || member.elname) {
+      return member.efname + " " + member.elname;
+    } else {
+      return member.klname + " " + member.kfname;
+    }
 
-    return member.efname + " " + member.elname;
+    
   }
 
   getAddress(member: Member) {
