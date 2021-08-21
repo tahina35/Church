@@ -21,6 +21,9 @@ import { NewFormComponent } from './components/reimbursement/new-form/new-form.c
 import { ReimbursementMainComponent } from './components/reimbursement/reimbursement-main/reimbursement-main.component';
 import { MainMenuComponent } from './components/reimbursement/main-menu/main-menu.component';
 import { SignerComponent } from './components/reimbursement/signer/signer.component';
+import { SignFormComponent } from './components/reimbursement/sign-form/sign-form.component';
+import { PayerComponent } from './components/reimbursement/payer/payer.component';
+import { PayFormComponent } from './components/reimbursement/pay-form/pay-form.component';
 
 
 const routes: Routes = [
@@ -52,6 +55,9 @@ const routes: Routes = [
       { path: 'new-form', component: NewFormComponent },
       { path: 'main-menu', component: MainMenuComponent },
       { path: 'signer', component: SignerComponent },
+      { path: 'sign-form/:id', component: SignFormComponent },
+      { path: 'payer', component: PayerComponent },
+      { path: 'pay-form/:id', component: PayFormComponent },
     ]
   }
 ];

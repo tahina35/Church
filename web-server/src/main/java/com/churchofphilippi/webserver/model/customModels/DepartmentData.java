@@ -1,5 +1,6 @@
 package com.churchofphilippi.webserver.model.customModels;
 
+import com.churchofphilippi.webserver.model.AllMembers;
 import com.churchofphilippi.webserver.model.Dept;
 import com.churchofphilippi.webserver.model.Member;
 import com.churchofphilippi.webserver.model.pagination.CustomPage;
@@ -17,5 +18,5 @@ import java.util.List;
 @AllArgsConstructor
 public class DepartmentData {
     private List<Dept> depts;
-    private CustomPage<Member> members;
+    private CustomPage<AllMembers> members;
 }

@@ -1,15 +1,12 @@
 <!-- Content Wrapper. Contains page content -->
-<div class="container-fluid" style="background-color: #f4f6f9">
+<div class="content-wrapper ml-0">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Reimbursement</h1>
+            <h1>New Payment Request</h1>
           </div>
-          <a class="nav-link pointer" (click)="logout()">
-            Log out
-          </a>
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -33,7 +30,7 @@
                   </div>
                 </div>
                 <div class="col-sm-4 invoice-col"></div>
-                <div class="col-sm-4 invoice-col">
+                <!-- <div class="col-sm-4 invoice-col">
                   <div class="form-horizontal">
                     <div class="form-group row">
                         <label class="col-sm-5 col-form-label">Please select a category</label>
@@ -46,7 +43,7 @@
                         </div>
                     </div>
                   </div>    
-                </div>
+                </div> -->
                 <div class="col-sm-4 invoice-col"></div>
               </div>
 
@@ -74,7 +71,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label"> Ministry Team Leader</label>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" [(ngModel)]="requestorName" name="mtl" disabled>
+                          <input type="text" class="form-control" [(ngModel)]="teamLeaderName" name="mtl" disabled>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -117,7 +114,7 @@
               <div class="row">             
                 <div class="col-12 table-responsive">
                   <button type="button" class="btn  btn-primary" (click)="open(expenseitems)">Add Item</button>
-                  <table class="table table-striped mt-2">
+                  <table class="table table-bordered table-striped mt-2">
                     <thead>
                       <tr>
                         <th>Budget Code</th>
@@ -131,7 +128,7 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let item of items">
-                        <td>{{item.budgetCode.code}}</td>
+                        <td>{{item.budgetCode.code}} - {{item.budgetCode.description}}</td>
                         <td>{{item.purchaseDate | dateToString}}</td>
                         <td>{{item.itemName}}</td>
                         <td>{{item.detailedPurpose}}</td>
@@ -257,7 +254,7 @@
           </div>
         </div>  
         <div class="form-group">
-          <label class="col-form-label">Date</label>
+          <label class="col-form-label">Purchase Date</label>
           <div class="input-group">
             <input class="form-control" [(ngModel)]="purchaseDate" ngbDatepicker #pd="ngbDatepicker" placeholder="Date" name="purchaseDate" required>
             <div class="input-group-append">

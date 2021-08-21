@@ -2,16 +2,14 @@ package com.churchofphilippi.webserver.service;
 
 import com.churchofphilippi.webserver.config.PageConfig;
 import com.churchofphilippi.webserver.exception.exceptionModel.ForeignKeyConstraintException;
+import com.churchofphilippi.webserver.model.AllMembers;
 import com.churchofphilippi.webserver.model.Dept;
 import com.churchofphilippi.webserver.model.Member;
-import com.churchofphilippi.webserver.model.Position;
-import com.churchofphilippi.webserver.model.Role;
 import com.churchofphilippi.webserver.model.customModels.DepartmentData;
-import com.churchofphilippi.webserver.model.keys.RoleKey;
 import com.churchofphilippi.webserver.model.pagination.CustomPage;
 import com.churchofphilippi.webserver.model.specification.DeptSpecification;
+import com.churchofphilippi.webserver.repository.AllMembersRepository;
 import com.churchofphilippi.webserver.repository.DeptRepository;
-import com.churchofphilippi.webserver.repository.MemberRepository;
 import com.churchofphilippi.webserver.repository.PositionRepository;
 import com.churchofphilippi.webserver.repository.RoleRepository;
 import lombok.AllArgsConstructor;
@@ -21,18 +19,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @AllArgsConstructor
 public class DeptService implements BaseService<Dept>{
 
     private final DeptRepository deptRepository;
-    private final MemberRepository memberRepository;
+    private final AllMembersRepository memberRepository;
     private final PositionRepository positionRepository;
     private final RoleRepository roleRepository;
     private final PageConfig pageConfig;
@@ -96,8 +92,8 @@ public class DeptService implements BaseService<Dept>{
             depts = new ArrayList<Dept>(new HashSet<Dept>(depts));
             Sort sort = Sort.by("fname").ascending();
             Pageable pageable = PageRequest.of(0, pageConfig.getMobileSize(), sort);
-            Page<Member> paginated = memberRepository.findByDept(depts.get(0).getDeptId(), pageable);
-            CustomPage<Member> members = new CustomPage<Member>(0, paginated.getTotalPages(), paginated.getTotalElements(), paginated.getContent());
+            Page<AllMembers> paginated = memberRepository.findByDept(depts.get(0).getDeptId(), pageable);
+            CustomPage<AllMembers> members = new CustomPage<AllMembers>(0, paginated.getTotalPages(), paginated.getTotalElements(), paginated.getContent());
 
             data.setDepts(depts);
             data.setMembers(members);

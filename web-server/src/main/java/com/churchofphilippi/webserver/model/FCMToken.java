@@ -35,7 +35,7 @@ public class FCMToken {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Member member;
+    private AllMembers member;
 
     @Column(nullable = false)
     private String token;

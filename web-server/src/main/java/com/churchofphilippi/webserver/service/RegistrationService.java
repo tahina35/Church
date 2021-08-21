@@ -1,5 +1,6 @@
 package com.churchofphilippi.webserver.service;
 
+import com.churchofphilippi.webserver.model.AllMembers;
 import com.churchofphilippi.webserver.model.Member;
 import com.churchofphilippi.webserver.registration.EmailValidator;
 import com.churchofphilippi.webserver.registration.RegistrationRequest;
@@ -15,10 +16,10 @@ import java.util.Random;
 public class RegistrationService {
 
     private final EmailValidator emailValidator;
-    private final MemberService memberService;
+    private final AllMemberService memberService;
     private final EmailSender emailSender;
 
-    public Member register(RegistrationRequest request){
+    public AllMembers register(RegistrationRequest request){
         boolean isValidEMail = emailValidator.test(request.getEmail());
         if(!isValidEMail) {
             throw new IllegalStateException("Email not valid");
@@ -26,15 +27,14 @@ public class RegistrationService {
 
         String password = generatePassword();
 
-        Member ret = memberService.registerMember(
-                        new Member(
+        AllMembers ret = memberService.registerMember(
+                        new AllMembers(
                                 request.getFname(),
                                 request.getLname(),
                                 request.getGender(),
                                 LocalDate.now(),
-                                request.getStreetName(),
-                                request.getStreetAddress(),
-                                request.getAptNumber(),
+                                request.getStreetAddressLine1(),
+                                request.getStreetAddressLine2(),
                                 request.getCity(),
                                 request.getState(),
                                 request.getZipCode(),

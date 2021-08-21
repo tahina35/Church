@@ -24,7 +24,7 @@ public class WorshipServiceController {
     private final WednesdayServiceService wednesdayServiceService;
     private final EarlyMorningServicesService earlyMorningServicesService;
     private final YouthServiceService youthServiceService;
-    private final MemberService memberService;
+    private final AllMemberService memberService;
     private final PageConfig pageConfig;
 
     @GetMapping("/preachers")

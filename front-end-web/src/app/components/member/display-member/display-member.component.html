@@ -51,8 +51,10 @@
                       <table class="table table-hover">
                         <thead>
                           <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Korean First Name</th>
+                            <th>Korean Last Name</th>
+                            <th>English First Name</th>
+                            <th>English Last Name</th>
                             <th>Email</th>
                             <th>Gender</th>
                             <th>Address</th>
@@ -64,10 +66,12 @@
                           <tr *ngFor="let member of members">
                             <td> <a class="table-link" [routerLink]="['/member/update', member.memberId]"> {{member.kfname}} </a></td>
                             <td><a class="table-link" [routerLink]="['/member/update', member.memberId]"> {{member.klname}} </a></td>
-                            <td><a class="table-link" [routerLink]="['/member/update', member.memberId]"> {{member.email}} </a></td>
+                            <td> <a class="table-link" [routerLink]="['/member/update', member.memberId]"> {{member.efname}} </a></td>
+                            <td><a class="table-link" [routerLink]="['/member/update', member.memberId]"> {{member.elname}} </a></td>
+                            <td><a class="table-link" [routerLink]="['/member/update', member.memberId]"> {{member.homeemail}} </a></td>
                             <td>{{member.gender | gender}}</td>
-                            <td>{{member.streetAddress}} {{member.streetName}}, {{member.city}}, {{member.state}} {{member.zipCode}}</td>
-                            <td>{{member.phoneNumber}}</td>
+                            <td>{{member.homeaddressstreetline1}}, {{member.homeaddresscity}}, {{member.homeaddressstate}} {{member.homeaddresszipcode}}</td>
+                            <td>{{member.homephonenumber}}</td>
                             <td>{{member.memberDate}}</td>
                           </tr>
                           

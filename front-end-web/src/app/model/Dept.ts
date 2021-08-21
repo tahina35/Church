@@ -9,5 +9,6 @@ export class Dept {
     parentDept:Dept
     leader:Member = new Member()
     parent:boolean = true;
+    teamLeader:Member
 
 }

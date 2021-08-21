@@ -2,16 +2,14 @@ package com.churchofphilippi.webserver.service;
 
 import com.churchofphilippi.webserver.config.MobileConfig;
 import com.churchofphilippi.webserver.exception.exceptionModel.FCMCredentialNotFoundException;
-import com.churchofphilippi.webserver.model.Dept;
-import com.churchofphilippi.webserver.model.DeptMember;
-import com.churchofphilippi.webserver.model.FCMToken;
-import com.churchofphilippi.webserver.model.Member;
+import com.churchofphilippi.webserver.model.*;
 import com.churchofphilippi.webserver.repository.DeptMemberRepository;
 import com.churchofphilippi.webserver.repository.FCMTokenRepository;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.messaging.*;
+import com.google.firebase.messaging.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -93,11 +91,11 @@ public class FCMTokenService implements BaseService<FCMToken> {
         return ret;
     }
 
-    public FCMToken getByMember(Member member) {
+    public FCMToken getByMember(AllMembers member) {
         return fcmTokenRepository.findByMember(member);
     }
 
-    public void subscribeToTopic(Member member, String topicName) {
+    public void subscribeToTopic(AllMembers member, String topicName) {
         try{
             FCMToken token = getByMember(member);
             if(token != null) {
@@ -115,7 +113,7 @@ public class FCMTokenService implements BaseService<FCMToken> {
         }
     }
 
-    public void unsubscribeFromTopic(Member member, String topicName) {
+    public void unsubscribeFromTopic(AllMembers member, String topicName) {
         try{
             FCMToken token = getByMember(member);
             if(token != null) {

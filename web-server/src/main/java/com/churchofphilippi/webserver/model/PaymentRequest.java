@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PaymentRequest {
+public class PaymentRequest implements Serializable {
 
     @Id
     @SequenceGenerator(
@@ -39,7 +40,7 @@ public class PaymentRequest {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Member requestor;
+    private AllMembers requestor;
 
     @Column(nullable = false)
     private String status;

@@ -1,9 +1,7 @@
 package com.churchofphilippi.webserver.model.keys;
 
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
@@ -12,8 +10,11 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class SignatureKey implements Serializable {
 
     Long memberId;
     Long paymentRequestId;
+    int signerCode;
 }

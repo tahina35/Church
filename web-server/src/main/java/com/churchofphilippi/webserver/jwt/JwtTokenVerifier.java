@@ -1,11 +1,9 @@
 package com.churchofphilippi.webserver.jwt;
 
 import com.churchofphilippi.webserver.exception.exceptionModel.TokenNotTrustedException;
-import com.churchofphilippi.webserver.model.Member;
-import com.churchofphilippi.webserver.service.MemberService;
+import com.churchofphilippi.webserver.service.AllMemberService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,7 +31,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
     private final JwtConfig jwtConfig;
     private final SecretKey secretKey;
     private final HandlerExceptionResolver handlerExceptionResolver;
-    private final MemberService memberService;
+    private final AllMemberService memberService;
     
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

@@ -37,7 +37,7 @@ public class DeptMember {
             nullable = false
     )
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Member member;
+    private AllMembers member;
 
     @Column(
             nullable = false
@@ -47,11 +47,4 @@ public class DeptMember {
     private LocalDate endDate;
     private String remark;
 
-    public DeptMember(Dept department, Member member, LocalDate startDate, LocalDate endDate, String remark) {
-        this.department = department;
-        this.member = member;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.remark = remark;
-    }
 }

@@ -20,16 +20,16 @@
                     </div>
                     <div class="card-body">
                         <h5><strong>{{memberDetails.member.kfname}} {{memberDetails.member.klname}}</strong></h5>
-                        <span>{{memberDetails.member.streetAddress}} {{memberDetails.member.streetName}}</span> <span >, s{{memberDetails.member.aptNumber}}</span>
+                        <span>{{memberDetails.member.homeaddressstreetline1}} {{memberDetails.member.homeaddressstreetline2}}</span>
                         <br>
-                        <span>{{memberDetails.member.city}}, {{memberDetails.member.state}} {{memberDetails.member.zipCode}}</span>
+                        <span>{{memberDetails.member.homeaddresscity}}, {{memberDetails.member.homeaddressstate}} {{memberDetails.member.homeaddresszipcode}}</span>
                         <br>
                         <span *ngIf="memberDetails.member.gender == 'M'"><strong>Gender:</strong> Male</span>
                         <span *ngIf="memberDetails.member.gender == 'F'"><strong>Gender:</strong> Female</span>
                         <br>
-                        <span><strong>Phone number:</strong>  {{memberDetails.member.phoneNumber}}</span>
+                        <span><strong>Phone number:</strong>  {{memberDetails.member.homephonenumber}}</span>
                         <br>
-                        <span><strong>Email:</strong>  {{memberDetails.member.email}}</span>
+                        <span><strong>Email:</strong>  {{memberDetails.member.homeemail}}</span>
                     </div>
                     <div class="card-footer clearfix" style="display: grid;">
                         <div class="btn-group">

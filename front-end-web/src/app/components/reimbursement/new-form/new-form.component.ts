@@ -11,8 +11,8 @@ import { Member } from 'src/app/model/Member';
 import { PaymentRequest } from 'src/app/model/PaymentRequest';
 import { PaymentRequestData } from 'src/app/model/PaymentRequestData';
 import { Receipt } from 'src/app/model/Receipt';
+import { Signature } from 'src/app/model/Signature';
 import { DepartmentService } from 'src/app/services/department.service';
-import { FileUploadService } from 'src/app/services/file-upload.service';
 import { LoginService } from 'src/app/services/login.service';
 import { MemberService } from 'src/app/services/member.service';
 import { PaymentRequestService } from 'src/app/services/payment-request.service';
@@ -26,6 +26,8 @@ export class NewFormComponent implements OnInit {
 
   date: NgbDateStruct;
   member: Member;
+  teamLeader: Member;
+  teamLeaderName: string;
   requestorName: string;
   requestorAddress: string;
   items:ExpenseItem[]= [];
@@ -42,21 +44,21 @@ export class NewFormComponent implements OnInit {
   formErrors: string[] = [];
   signed: boolean = false;
   paymentRequest: PaymentRequest = new PaymentRequest();
-  receipts: Array<Receipt> = [];
+  receipts: Array<Receipt>;
   submitting: boolean = false;
 
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
 
   signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
-      'minWidth': 5,
-      'canvasWidth': 600,
-      'canvasHeight': 210
-  };
+    'canvasWidth': 500,
+    'canvasHeight': 175,
+    'minWidth': 0.5
+  };    
 
   //file upload
   shortLink: string = "";
   loading: boolean = false; // Flag variable
-  files: File[] = []; // Variable to store file
+  files: FormData = new FormData();// Variable to store file
 
   pageYoffset;
 
@@ -70,7 +72,6 @@ export class NewFormComponent implements OnInit {
     private modalService: NgbModal,
     private paymentRequestService: PaymentRequestService,
     private deptService: DepartmentService,
-    private fileUploadService: FileUploadService,
     private scroll: ViewportScroller,
     private router: Router) {
   }
@@ -146,8 +147,20 @@ export class NewFormComponent implements OnInit {
   }
 
   deptChange($event) {
-    this.deptLeader = this.paymentRequest.department.leader;
-    this.deptLeaderName = this.memberService.getName(this.deptLeader);
+    console.log(this.paymentRequest);
+    if(this.paymentRequest.department.teamLeader) {
+      this.deptLeader = this.paymentRequest.department.parentDept.leader;
+      this.deptLeaderName = this.memberService.getName(this.deptLeader);
+      this.teamLeader = this.paymentRequest.department.teamLeader;
+      this.teamLeaderName = this.memberService.getName(this.teamLeader);
+    } else {  
+      this.teamLeader = null;
+      this.teamLeaderName = "";
+      this.deptLeader = this.paymentRequest.department.leader;
+      this.deptLeaderName = this.memberService.getName(this.deptLeader);
+    }
+   
+    
   }
 
   addItem() {
@@ -179,44 +192,49 @@ export class NewFormComponent implements OnInit {
     this.formErrors = [];
     if(this.validateForm()) {
       this.submitting = true;
-      this.uploadDocuments()
       this.member.signature = this.signaturePad.toDataURL();
       let date: string = this.date.year + '-' + this.date.month + '-' + this.date.day;
-      let director: Member = this.paymentRequest.department.leader;
+      let director: Member = this.deptLeader;
       let pastor: Member = new Member();
       pastor.memberId = +this.selectedPastor;
-      let signers = [director, pastor];
       this.paymentRequest.creationDate = new Date(date);
       this.paymentRequest.requestor = this.member;
       this.paymentRequest.requestorAddress = this.requestorAddress;
-      this.createReceipts();
 
-      let data : PaymentRequestData = new PaymentRequestData();
-      data.paymentRequest = this.paymentRequest;
-      data.items = this.items;
-      data.signers = signers;
-      data.receipts = this.receipts;
+      console.log(this.paymentRequest)
 
-      console.log(data);
+      let prdata : PaymentRequestData = new PaymentRequestData();
+      prdata.paymentRequest = this.paymentRequest;
+      prdata.items = this.items;
+      prdata.signatures = this.createSignatures(director, pastor, this.teamLeader);
+      prdata.receipts = this.receipts;
 
-      this.paymentRequestService.createPR(data).subscribe(
+      console.log(prdata.signatures);
+
+      this.paymentRequestService.uploadDocuments(this.files).subscribe(
         (res) => {
-          this.router.navigate(['/reimbursement']);
+          console.log(res);
+          this.paymentRequestService.createPR(prdata).subscribe(
+            (res) => {
+              this.router.navigate(['/reimbursement']);
+            }
+          )
         }
-      )
+      )  
       
     } else {
       this.scroll.scrollToPosition([0,0]);
     }
   }
 
-  createReceipts() {
-    for(var i = 0; i<this.files.length; i++) {
-      let receipt = new Receipt();
-      receipt.name = this.files[i].name;
-      this.receipts.push(receipt);
-    }
-      
+  createSignatures(director: Member, pastor: Member, teamLeader: Member) {
+    let directorSignature = new Signature();
+    let pastorSignature = new Signature();
+    let teamLeaderSignature = new Signature();
+    directorSignature.member = director;
+    pastorSignature.member = pastor;
+    teamLeaderSignature.member = teamLeader
+    return [directorSignature, pastorSignature, teamLeaderSignature];
   }
 
   validateForm() {
@@ -224,7 +242,7 @@ export class NewFormComponent implements OnInit {
     if(!this.date) {
       this.formErrors.push("Date");
       valid = false;
-    } if(!this.paymentRequest.department) {
+    } if(!this.paymentRequest.department.deptId) {
       this.formErrors.push("Ministry Team");
       valid = false;
     } if(!this.selectedPastor) {
@@ -233,7 +251,7 @@ export class NewFormComponent implements OnInit {
     } if(this.items.length == 0) {
       this.formErrors.push("Expense Items");
       valid = false;
-    } if(this.files.length == 0) {
+    } if(!this.files.has('files')) {
       this.formErrors.push("Receipts and Documents");
       valid = false;
     } if(!this.paymentRequest.payableTo) {
@@ -271,20 +289,17 @@ export class NewFormComponent implements OnInit {
     this.signed = false;
   }
 
-  //file upload
-
   // On file Select
   onChange(event) {
-    this.files = [];
+    this.files.delete('files');
+    this.receipts = [];
     for(var i = 0; i<event.target.files.length; i++) {
-      this.files.push(event.target.files[i]);
+      this.files.append('files', event.target.files[i]);
+      let receipt = new Receipt();
+      receipt.name = event.target.files[i].name;
+      this.receipts.push(receipt);
     }
   }
-
-  // OnClick of button Upload
-  uploadDocuments() {
-    this.fileUploadService.upload(this.files);
-  } 
 
 
 }

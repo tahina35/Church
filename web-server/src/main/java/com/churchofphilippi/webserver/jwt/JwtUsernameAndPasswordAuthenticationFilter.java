@@ -1,9 +1,7 @@
 package com.churchofphilippi.webserver.jwt;
 
 import com.churchofphilippi.webserver.exception.exceptionModel.AuthenticationException;
-import com.churchofphilippi.webserver.exception.exceptionModel.TokenNotTrustedException;
-import com.churchofphilippi.webserver.model.Member;
-import com.churchofphilippi.webserver.service.MemberService;
+import com.churchofphilippi.webserver.service.AllMemberService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import lombok.AllArgsConstructor;
@@ -33,7 +31,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
     private final HandlerExceptionResolver handlerExceptionResolver;
     private final JwtConfig jwtConfig;
     private final SecretKey secretKey;
-    private final MemberService memberService;
+    private final AllMemberService memberService;
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {

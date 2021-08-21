@@ -48,6 +48,9 @@ import { MainMenuComponent } from './components/reimbursement/main-menu/main-men
 import { DateToStringPipe } from './pipe/DateToStringPipe';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { SignerComponent } from './components/reimbursement/signer/signer.component';
+import { SignFormComponent } from './components/reimbursement/sign-form/sign-form.component';
+import { PayerComponent } from './components/reimbursement/payer/payer.component';
+import { PayFormComponent } from './components/reimbursement/pay-form/pay-form.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -86,6 +89,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ReimbursementMainComponent,
     MainMenuComponent,
     SignerComponent,
+    SignFormComponent,
+    PayerComponent,
+    PayFormComponent,
   ],
   imports: [
     BrowserModule,

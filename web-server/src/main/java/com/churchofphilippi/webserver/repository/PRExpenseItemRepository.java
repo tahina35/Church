@@ -12,4 +12,5 @@ public interface PRExpenseItemRepository extends JpaRepository<PrExpenseItem, Pr
 
     @Query(value = "SELECT prei.item FROM PrExpenseItem prei WHERE prei.paymentRequest.paymentRequestId = ?1")
     List<ExpenseItem> getExpenseItems(long prId);
+
 }

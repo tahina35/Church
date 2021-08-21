@@ -55,6 +55,11 @@ public class Dept {
     @ManyToOne
     @JoinColumn(name="member_id")
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
-    private Member leader;
+    private AllMembers leader;
+
+    @ManyToOne
+    @JoinColumn(name="team_leader")
+    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+    private AllMembers teamLeader;
     
 }

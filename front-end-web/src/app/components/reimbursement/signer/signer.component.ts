@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ExpenseItem } from 'src/app/model/ExpenseItem';
 import { PaymentRequest } from 'src/app/model/PaymentRequest';
 import { PaymentRequestData } from 'src/app/model/PaymentRequestData';
@@ -13,11 +14,12 @@ import { PaymentRequestService } from 'src/app/services/payment-request.service'
 export class SignerComponent implements OnInit {
 
   loggedMember;
-  paymentRequestsData: PaymentRequestData[];
+  paymentRequestData: PaymentRequestData[];
   prList = [];
 
   constructor(
     private paymentRequestService: PaymentRequestService,
+    private router: Router,
     private memberService: MemberService) { }
 
   ngOnInit(): void {
@@ -28,7 +30,7 @@ export class SignerComponent implements OnInit {
   getPRs(memberId: number) {
     this.paymentRequestService.getPRWaitingForSignature(memberId).subscribe(
       (prData: PaymentRequestData[]) => {
-        this.paymentRequestsData = prData;
+        this.paymentRequestData = prData;
         for (let i=0; i < prData.length; i++) {
           const data = {
             prId: prData[i].paymentRequest.paymentRequestId,
@@ -49,6 +51,10 @@ export class SignerComponent implements OnInit {
       total+= items[i].amount;
     }
     return total;
+  }
+
+  navigateToFormSignaturePage(prID: number) {
+    this.router.navigate(['/reimbursement/sign-form/' + prID]);
   }
 
 }

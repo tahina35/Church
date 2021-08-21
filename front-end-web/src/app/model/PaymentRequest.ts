@@ -7,14 +7,14 @@ export class PaymentRequest {
     paymentRequestId: number
     creationDate: Date = new Date()
     requestorAddress: string
-    requestor: Member
+    requestor: Member = new Member()
     status: string
     paymentDate: Date
     paidByCreditCard: boolean = false
     paidByCheck: boolean = false
     paidByCash: boolean = false
     department: Dept = new Dept()
-    checkDetails: checkDetails
+    checkDetails: checkDetails;
     category: number = 1
     payableTo: string
 

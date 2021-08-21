@@ -40,9 +40,10 @@ export class LoginComponent implements OnInit {
         this.loginservice.storeToken(token);
         this.memberService.findByUsername(this.credentials.username).subscribe(
           (member: Member) => {
+            console.log(member);
             let memberDetails = {
               id: member.memberId,
-              username: member.email,
+              username: member.homeemail,
               fname: member.kfname,
               lname: member.klname,
               efname: member.efname,

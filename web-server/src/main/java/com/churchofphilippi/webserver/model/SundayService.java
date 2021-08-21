@@ -48,7 +48,7 @@ public class SundayService {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Member prayer;
+    private AllMembers prayer;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="sermon_id")

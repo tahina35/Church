@@ -1,0 +1,49 @@
+<div class="content-wrapper ml-0" >
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Pay Payment Request</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <section class="content" >
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">List of payment requet(s) waiting for payment</h3>
+                      </div>
+                      <div class="card-body table-responsive p-0">
+                          <table class="table table-hover mt-2 ">
+                              <thead>
+                                <tr>
+                                  <th>Payment Request ID</th>
+                                  <th>Requestor Name</th>
+                                  <th>Date created</th>
+                                  <th>Amount</th>
+                                  <th>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let pr of prList" class="pointer" (click)="navigateToFormSignaturePage(pr.prId)">
+                                    <td>{{pr.prId}}</td>
+                                    <td>{{pr.requestor}}</td>
+                                    <td>{{pr.dateCreated}}</td>
+                                    <td>$ {{pr.amount}}</td>
+                                    <td style="color: red;">{{pr.status}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                      </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+</div>    
+

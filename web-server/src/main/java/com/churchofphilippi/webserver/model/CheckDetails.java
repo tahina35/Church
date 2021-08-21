@@ -42,5 +42,5 @@ public class CheckDetails {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Member issuedBy;
+    private AllMembers issuedBy;
 }

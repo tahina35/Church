@@ -25,7 +25,7 @@ public class Signature {
     @MapsId("memberId")
     @JoinColumn(name = "member_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Member member;
+    private AllMembers member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("paymentRequestId")
@@ -41,6 +41,4 @@ public class Signature {
 
     private LocalDate signedDate;
 
-    @Column(nullable = false)
-    private int signerCode;
 }

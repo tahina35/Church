@@ -28,7 +28,7 @@ public class Role {
             nullable = false
     )
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Member member;
+    private AllMembers member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("positionId")

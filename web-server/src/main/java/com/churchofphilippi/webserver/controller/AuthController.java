@@ -1,8 +1,8 @@
 package com.churchofphilippi.webserver.controller;
 
+import com.churchofphilippi.webserver.model.AllMembers;
 import com.churchofphilippi.webserver.model.Member;
-import com.churchofphilippi.webserver.registration.RegistrationRequest;
-import com.churchofphilippi.webserver.service.MemberService;
+import com.churchofphilippi.webserver.service.AllMemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "api/auth")
 public class AuthController {
 
-    private final MemberService memberService;
+    private final AllMemberService memberService;
 
     @GetMapping("/forgot-password/{username}")
     public ResponseEntity<?> getMember(@PathVariable("username") String username) {
@@ -20,7 +20,7 @@ public class AuthController {
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword(@RequestBody Member member) {
+    public ResponseEntity<?> resetPassword(@RequestBody AllMembers member) {
         return ResponseEntity.ok(memberService.resetPassword(member));
     }
 }

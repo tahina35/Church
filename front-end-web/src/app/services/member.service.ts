@@ -79,12 +79,8 @@ export class MemberService extends BaseService {
 
   getAddress(member: Member) {
 
-    let aptNumber = "";
-    if(member.aptNumber) {
-      aptNumber = ", APT #" + member.aptNumber;
-    }
-
-    let address = member.streetAddress + " " + member.streetName + aptNumber + ", " + member.city + ", " + member.state + " " + member.zipCode;
+    let streetAddressLine2 = (member.homeaddressstreetline2) ? ", " + member.homeaddressstreetline2 : "";
+    let address = member.homeaddressstreetline1 + streetAddressLine2 + ", " + member.homeaddresscity + ", " + member.homeaddressstate + " " + member.homeaddresszipcode;
     return address;
   }
 

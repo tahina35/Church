@@ -43,6 +43,6 @@ public class Sermon {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
-    private Member preacher;
+    private AllMembers preacher;
 
 }

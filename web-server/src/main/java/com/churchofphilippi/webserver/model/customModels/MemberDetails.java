@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class MemberDetails {
 
-    private Member member;
+    private AllMembers member;
     private List<Dept> allDepts;
     private List<Position> allPositions;
     private List<DeptMember> memberDepts;

@@ -46,11 +46,11 @@
                         </div>   
                         <div class="form-group">
                             <label>Email address</label>
-                            <input type="email" class="form-control" [ngClass]="{'is-invalid': email.touched && !email.valid}" name="email" #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="member.email" placeholder="Email address" required>
+                            <input type="email" class="form-control" [ngClass]="{'is-invalid': email.touched && !email.valid}" name="email" #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="member.homeemail" placeholder="Email address" required>
                         </div>
                         <div class="form-group">
                             <label>Phone number</label>
-                            <input type="number" class="form-control" [ngClass]="{'is-invalid': phonenumber.touched && !phonenumber.valid}" name="phonenumber" #phonenumber="ngModel" [(ngModel)]="member.phoneNumber" placeholder="Phone number" pattern="^\d{10}$" required>
+                            <input type="number" class="form-control" [ngClass]="{'is-invalid': phonenumber.touched && !phonenumber.valid}" name="phonenumber" #phonenumber="ngModel" [(ngModel)]="member.homephonenumber" placeholder="Phone number" pattern="^\d{10}$" required>
                         </div>           
                       </div>
                   </div>
@@ -68,19 +68,19 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label >Street address line 1</label>
-                            <input type="email" class="form-control" [ngClass]="{'is-invalid': address1.touched && !address1.valid}" name="address1" #address1="ngModel" [(ngModel)]="member.streetAddress" placeholder="Street address line 1" maxlength="200" required>
+                            <input type="text" class="form-control" [ngClass]="{'is-invalid': address1.touched && !address1.valid}" name="address1" #address1="ngModel" [(ngModel)]="member.homeaddressstreetline1" placeholder="Street address line 1" maxlength="200" required>
                         </div>
                         <div class="form-group">
                             <label >Street address line 2 (optional)</label>
-                            <input type="email" class="form-control" name="address2"  #address2="ngModel" [(ngModel)]="member.streetName" placeholder="Street address line 2 (optional)">
+                            <input type="text" class="form-control" name="address2"  #address2="ngModel" [(ngModel)]="member.homeaddressstreetline2" placeholder="Street address line 2 (optional)">
                         </div>
                         <div class="form-group">
                             <label >City</label>
-                            <input type="email" class="form-control" [ngClass]="{'is-invalid': city.touched && !city.valid}" name="city" #city="ngModel" [(ngModel)]="member.city" placeholder="City" required>
+                            <input type="text" class="form-control" [ngClass]="{'is-invalid': city.touched && !city.valid}" name="city" #city="ngModel" [(ngModel)]="member.homeaddresscity" placeholder="City" required>
                         </div>
                         <div class="form-group">
                             <label>State</label>
-                            <select class="custom-select" [ngClass]="{'is-invalid': state.touched && !state.valid}" name="state" #state="ngModel" [(ngModel)]="member.state" required>
+                            <select class="custom-select" [ngClass]="{'is-invalid': state.touched && !state.valid}" name="state" #state="ngModel" [(ngModel)]="member.homeaddressstate" required>
                               <option></option>
                               <option>AL</option>
                               <option>AK</option>
@@ -137,7 +137,7 @@
                         </div>
                         <div class="form-group">
                             <label>Zip/Postal code</label>
-                            <input type="number" class="form-control" name="zipcode" #zipcode="ngModel" [(ngModel)]="member.zipCode" placeholder="Zip/Postal code" required>
+                            <input type="number" class="form-control" name="zipcode" #zipcode="ngModel" [(ngModel)]="member.homeaddresszipcode" placeholder="Zip/Postal code" required>
                         </div>
                     </div>
                     <!-- /.card-body -->

@@ -117,6 +117,7 @@ export class DisplayDepartmentComponent implements OnInit {
   }
 
   addDept() {
+    console.log(this.dept);
     if(this.selectedDept) {
       this.dept.parentDept = { deptId: this.selectedDept} as Dept;
     } else {
@@ -132,6 +133,8 @@ export class DisplayDepartmentComponent implements OnInit {
     }
 
     this.dept.parent = this.isParentDept;
+
+    console.log(this.dept);
 
     this.deptService.add(this.dept).subscribe(
       (data) => {   

@@ -13,12 +13,11 @@ public class RegistrationRequest {
     private final String lname;
     private final String email;
     private final String gender;
-    private final String streetName;
-    private final String streetAddress;
-    private final String aptNumber;
+    private final String streetAddressLine1;
+    private final String streetAddressLine2;
     private final String city;
     private final String state;
-    private final Integer zipCode;
+    private final String zipCode;
     private final String phoneNumber;
 
 }

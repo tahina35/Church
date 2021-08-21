@@ -3,7 +3,7 @@ package com.churchofphilippi.webserver.security.config;
 import com.churchofphilippi.webserver.jwt.JwtConfig;
 import com.churchofphilippi.webserver.jwt.JwtTokenVerifier;
 import com.churchofphilippi.webserver.jwt.JwtUsernameAndPasswordAuthenticationFilter;
-import com.churchofphilippi.webserver.service.MemberService;
+import com.churchofphilippi.webserver.service.AllMemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ import javax.crypto.SecretKey;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final MemberService memberService;
+    private final AllMemberService memberService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JwtConfig jwtConfig;
     private final SecretKey secretKey;

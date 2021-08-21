@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Member } from 'src/app/model/Member';
 import { LoginService } from 'src/app/services/login.service';
+import { MemberService } from 'src/app/services/member.service';
 
 @Component({
   selector: 'app-reimbursement-main',
@@ -10,11 +12,19 @@ export class ReimbursementMainComponent implements OnInit {
 
   username: string = '';
 
-  constructor(private loginService: LoginService) { }
+  constructor(
+    private loginService: LoginService,
+    private memberService: MemberService
+    ) { }
 
   ngOnInit(): void {
     let member = JSON.parse(localStorage.getItem('member'));
-    this.username = member.fname + ' ' + member.lname;
+    this.memberService.findByUsername(member.username).subscribe(
+      (res: Member) => {
+        this.username = this.memberService.getName(res);
+      }
+    )
+    
   }
 
   logout() {

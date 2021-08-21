@@ -1,8 +1,8 @@
 package com.churchofphilippi.webserver.controller;
 
 import com.churchofphilippi.webserver.config.PageConfig;
+import com.churchofphilippi.webserver.model.AllMembers;
 import com.churchofphilippi.webserver.model.DeptMember;
-import com.churchofphilippi.webserver.model.Member;
 import com.churchofphilippi.webserver.model.Role;
 import com.churchofphilippi.webserver.model.customModels.MemberDetails;
 import com.churchofphilippi.webserver.model.customModels.MemberFilters;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "api/member")
 public class MemberController {
 
-    private final MemberService memberService;
+    private final AllMemberService memberService;
     private final DeptService deptService;
     private final PositionService positionService;
     private final DeptMemberService deptMemberService;
@@ -42,8 +42,8 @@ public class MemberController {
 
     @GetMapping("/department/{id}/page/{pageNo}")
     public ResponseEntity<?> getMemberByDeptPaginated(@PathVariable("id") Long deptId, @PathVariable("pageNo") int pageNo) {
-        Page<Member> paginated = memberService.findMemberByDeptPaginated(deptId, pageNo, pageConfig.getMobileSize());
-        CustomPage<Member> page = new CustomPage<Member>(pageNo, paginated.getTotalPages(), paginated.getTotalElements(), paginated.getContent());
+        Page<AllMembers> paginated = memberService.findMemberByDeptPaginated(deptId, pageNo, pageConfig.getMobileSize());
+        CustomPage<AllMembers> page = new CustomPage<AllMembers>(pageNo, paginated.getTotalPages(), paginated.getTotalElements(), paginated.getContent());
         return ResponseEntity.ok(page);
     }
 
@@ -82,21 +82,21 @@ public class MemberController {
     }
 
     @PutMapping
-    public ResponseEntity<?> save(@RequestBody Member member) {
+    public ResponseEntity<?> save(@RequestBody AllMembers member) {
         return ResponseEntity.ok(memberService.save(member));
     }
 
     @GetMapping("/page/{pageNo}")
     public ResponseEntity<?> getMembersPaginated(@PathVariable("pageNo")int pageNo, @RequestParam(name = "dept") String dept, @RequestParam(name = "pos") String position) {
-        Page<Member> paginated = memberService.findPaginated(pageNo, pageConfig.getSize(), dept, position);
-        CustomPage<Member> page = new CustomPage<Member>(pageNo, paginated.getTotalPages(), paginated.getTotalElements(), paginated.getContent());
+        Page<AllMembers> paginated = memberService.findPaginated(pageNo, pageConfig.getSize(), dept, position);
+        CustomPage<AllMembers> page = new CustomPage<AllMembers>(pageNo, paginated.getTotalPages(), paginated.getTotalElements(), paginated.getContent());
         return ResponseEntity.ok(page);
     }
 
     @GetMapping("/search")
     public ResponseEntity<?> searchMember(@RequestParam(name = "v") String value, @RequestParam(name = "page") int pageNo) {
-        Page<Member> paginated = memberService.findAllWithFilters(value, pageNo, pageConfig.getSize());
-        CustomPage<Member> page = new CustomPage<Member>(pageNo, paginated.getTotalPages(), paginated.getTotalElements(), paginated.getContent());
+        Page<AllMembers> paginated = memberService.findAllWithFilters(value, pageNo, pageConfig.getSize());
+        CustomPage<AllMembers> page = new CustomPage<AllMembers>(pageNo, paginated.getTotalPages(), paginated.getTotalElements(), paginated.getContent());
         return ResponseEntity.ok(page);
     }
 
@@ -125,5 +125,10 @@ public class MemberController {
     @GetMapping("/pastors")
     public ResponseEntity<?> getPastors() {
         return ResponseEntity.ok(memberService.getPastors());
+    }
+
+    @GetMapping("/edit")
+    public void editSchema() {
+        memberService.editSchema();
     }
 }
